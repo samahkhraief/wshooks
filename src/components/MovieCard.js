@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating'
 const MovieCard = ({el}) => {
    
@@ -14,6 +15,8 @@ const MovieCard = ({el}) => {
       <Card.Text>
       <Rating ratingValue={el.rating} readonly={true} /* Available Props */ />
       </Card.Text>
+<Link  to={`/Description/${el.id}`}>
+      <button variant="primary">description</button></Link>
     </Card.Body>
   </Card>
   )

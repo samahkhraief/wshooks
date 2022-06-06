@@ -1,11 +1,13 @@
 import "./App.css";
-import MovieList from "./components/MovieList";
+
 import { list } from "./data";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Add from "./components/Add";
-
 import { useState } from "react";
-import FilterMovie from "./components/FilterMovie";
+import { Route, Routes } from "react-router-dom";
+import FilterMovie from './components/FilterMovie'
+import MovieList from './components/MovieList'
+import Add from './components/Add'
+import Description from './components/Description'
 function App() {
   const [movie, setmovie] = useState(list);
   const [filterValue, setfilterValue] = useState("");
@@ -19,23 +21,33 @@ function App() {
 
   return (
     <div className="App" style={{ backgroundColor: "black" }}>
-      <FilterMovie
+ <Routes>
+   <Route path='/' element={<div>
+    <FilterMovie 
         filterStars={filterStars}
         filterValue={filterValue}
         handlerating={handlerating}
         handlefilter={handlefilter}
       />
-      <MovieList
+       <MovieList
        
-        style={{ color: "blue" }}
-        movies={movie.filter(
-          (el) =>
-            el.title.toLowerCase().includes(filterValue.toLowerCase()) &&
-            el.rating >= filterStars
-        )}
-      />
-      <Add handleadd={handleadd} />
+       style={{ color: "blue" }}
+       movies={movie.filter(
+         (el) =>
+           el.title.toLowerCase().includes(filterValue.toLowerCase()) &&
+           el.rating >= filterStars
+       )}
+
+     />
+           <Add handleadd={handleadd} />
+   </div> }
+   />
+
+<Route exact path='/Description/:id' element={<Description movie={movie}/>}/>
+ </Routes>
     </div>
+ 
+
   );
 }
 
